@@ -2,7 +2,7 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-
+// комментарий чтобы активировать actions
 #define UNIMPLEMENTED \
     do { \
         fprintf(stderr, "[ERROR] function %s is unimplemented\n", func); \

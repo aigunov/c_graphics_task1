@@ -1,5 +1,7 @@
 # c_graphics_task1
 
+aigunov_ss
+
 1. create an empty public github repo 
 2. copy this repo to your repo(all except .git/)
 3. сomplete the task (edit code in src/).

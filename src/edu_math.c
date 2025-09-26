@@ -5,7 +5,7 @@
 
 #define UNIMPLEMENTED \
     do { \
-        fprintf(stderr, "[ERROR] function %s is unimplemented\n", __func__); \
+        fprintf(stderr, "[ERROR] function %s is unimplemented\n", func); \
         abort(); \
     } while (0)
 
@@ -16,71 +16,95 @@ int edu_add(int a, int b) {
 }
 
 int edu_sub(int a, int b) {
-    UNUSED(a);
-    UNUSED(b);
-    UNIMPLEMENTED;
-    return 0;
+    return a-b;
 }
 
 int edu_mult(int a, int b) {
-    UNUSED(a);
-    UNUSED(b);
-    UNIMPLEMENTED;
-    return 0;
+    return a*b;
 }
 
 int edu_div(int a, int b) {
-    UNUSED(a);
-    UNUSED(b);
-    UNIMPLEMENTED;
-    return 0;
+    if (b==0){
+        fprintf(stderr, "ERROR: Division by zero: %d", b);
+        abort();
+    }
+    return a/b;
 }
 
 int edu_mod(int a, int b) {
-    UNUSED(a);
-    UNUSED(b);
-    UNIMPLEMENTED;
-    return 0;
+    return a % b;
 }
 
 int edu_pow(int a, int b) {
-    UNUSED(a);
-    UNUSED(b);
-    UNIMPLEMENTED;
-    return 0;
+    int result = 1;
+    int base = a;
+    int exp = b;
+    if (exp<0){
+        return 0;
+    }
+    while (exp > 0){
+        if (exp % 2 == 1){
+            result *= base;
+        }
+        base *= base;
+        exp /= 2;
+    }
+    return result;
 }
 
 int edu_abs(int a) {
-    UNUSED(a);
-    UNIMPLEMENTED;
+    return abs(a);
 }
 
 int edu_gcd(int a, int b) {
-    UNUSED(a);
-    UNUSED(b);
-    UNIMPLEMENTED;
+    if (a < 0) a = -a;
+    if (b < 0) b = -b;
+    while (b != 0) {
+        int temp = b;
+        b = a % b;
+        a = temp;
+    }
+    return a;
 }
 
 int edu_lcm(int a, int b) {
-    UNUSED(a);
-    UNUSED(b);
-    UNIMPLEMENTED;
-    return 0;
+    if (a == 0 || b == 0) return 0;
+    int gcd = edu_gcd(a, b);
+    return (a / gcd) * b;  
 }
 
 int edu_int_sqrt(int a) {
-    UNUSED(a);
-    UNIMPLEMENTED;
-    return 0;
+    if (a < 0) {
+        fprintf(stderr, "ERROR: negative input %d",a);
+        abort();
+    }
+    int left = 0, right = a, ans = 0;
+    while (left <= right) {
+        int mid = left + (right - left) / 2;
+        if ((long long)mid * mid <= a) {
+            ans = mid;
+            left = mid + 1;
+        } else {
+            right = mid - 1;
+        }
+    }
+    return ans;
 }
 
 int edu_sgn(int a) {
-    UNUSED(a);
-    UNIMPLEMENTED;
+    if (a> 0) return 1;
+    if (a<0) return -1;
+    return 0;
 }
 
 int edu_fact(int a) {
-    UNUSED(a);
-    UNIMPLEMENTED;
-    return 0;
+    if (a < 0) {
+        fprintf(stderr, "ERROR: negative input %d", a);
+        abort();
+    }
+    int result = 1;
+    for (int i = 2; i <= a; i++) {
+        result *= i;
+    }
+    return result;
 }
